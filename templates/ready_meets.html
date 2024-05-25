@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Записи на сегодня
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Все записи на сегодня</h1>
+
+    {% for node in meets %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">{{ node.time }}</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ node.first_name }} {{ node.last_name }}</h5>
+            <p class="card-text">Мастер: {{ node.master_name }}</p>
+            <p class="card-text">Телефон мастера: {{ node.master_phone }}</p>
+            <a href="{{ url_for('edit_meet', id=node.id) }}" class="btn btn-primary">Редактировать</a>
+            <form action="{{ url_for('post_delete', id=node.id) }}" method="post" style="display: inline-block;">
+              <button type="submit" class="btn btn-warning">Удалить</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-warning">Нет запланированных встреч на сегодня.</div>
+    {% endfor %}
+</div>
+{% endblock %}

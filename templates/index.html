@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Добро пожаловать на наш сайт!</h1>
+    <div class="row">
+        <!-- Карточка для записи на услугу -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/woman.jpg') }}" class="card-img-top img-custom-width" alt="Запись на услугу">
+                <div class="card-body">
+                    <h5 class="card-title">Запись на услугу</h5>
+                    <p class="card-text">Запишитесь на наши услуги прямо сейчас!</p>
+                    <a href="{{ url_for('meet') }}" class="btn btn-primary">Перейти к записи</a>
+                </div>
+            </div>
+        </div>
+        <!-- Карточка для уже записанных встреч -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/nails.jpg') }}" class="card-img-top" alt="Записанные встречи">
+                <div class="card-body">
+                    <h5 class="card-title">Уже записанные встречи</h5>
+                    <p class="card-text">Просмотрите список всех ваших встреч.</p>
+                    <a href="{{ url_for('ready_meets') }}" class="btn btn-primary">Просмотреть встречи</a>
+                </div>
+            </div>
+        </div>
+        <!-- Карточка о компании -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/salon.jpg') }}" class="card-img-top" alt="О компании">
+                <div class="card-body">
+                    <h5 class="card-title">О компании</h5>
+                    <p class="card-text">Узнайте больше о нашей компании и услугах.</p>
+                    <a href="{{ url_for('about') }}" class="btn btn-primary">Узнать больше</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
