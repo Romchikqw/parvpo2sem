@@ -1,19 +1,37 @@
 version: '3.8'
 services:
-  web:
-    build: .
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    volumes:
+      - "redis_data:/data"
+    networks:
+      - app-network
+
+  consumer:
+    build:
+      context: ./1_consumer
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: ./2_app
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
-    environment:
-      - FLASK_ENV=development
-  db:
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: exampledb
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    depends_on:
+      - redis
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  postgres_data:
+  redis_data:
