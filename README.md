@@ -1,1 +1,0 @@
-# parvpo2sem
